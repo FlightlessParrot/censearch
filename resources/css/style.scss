@@ -1,0 +1,67 @@
+
+@use './predefine.scss' as pre;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background: url('../../public/images/background.jpg');
+    color: white;
+}
+.search{
+    background-color: pre.$c-sel;
+    padding: 3px 6px 3px 6px;
+    border-radius: 2px;
+}
+
+.indicator{
+    border-radius: 100%;
+    height:15px;
+    width: 15px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+}
+
+#welcome-content::-webkit-scrollbar{
+        display: none;
+        
+      }
+
+.custom-scrollbar{
+    &::-webkit-scrollbar 
+    {
+        display: block;
+        
+    }
+    &::-webkit-scrollbar-track
+   {
+    
+  background: pre.$c-dark-sea;
+}
+    &::-webkit-scrollbar-thumb{
+      // background-color: pre.$c-dark-sel;
+      background: pre.$c-sel;
+       //color: white
+    }
+}
+
+.scroller{
+    scroll-snap-type: none;
+    scroll-snap-align: unset;
+    padding: 10px 10px 10px 10px;
+
+    overflow: scroll;
+    height: 70%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+      #welcome-content{
+        scroll-snap-type: y mandatory;
+        >*{
+            scroll-snap-align: start;
+        }
+      }
+
