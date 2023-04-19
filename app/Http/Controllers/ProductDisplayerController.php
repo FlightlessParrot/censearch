@@ -10,7 +10,7 @@ use PhpParser\Node\Expr\Cast\Array_;
 
 class ProductDisplayerController extends Controller
 {
-    static $nokaut_token='1/51ba84a633f7684e262755fccf633fc4fbc331ae6f9e7fa523feed4f5048b28d';
+   
     static $url='http://nokaut.io/api/v2/products?fields=id,url,photo_id,title&limit=50&phrase=';
     public function searchProducts(Request $request) 
     {
@@ -24,7 +24,7 @@ class ProductDisplayerController extends Controller
     }
     private function getNokautProducts($search)
     {
-         $response = Http::withToken(self::$nokaut_token)->get(self::$url.$search)->throw();
+         $response = Http::withToken($_ENV['NOKAUT_KEY'])->get(self::$url.$search)->throw();
         $body=$response->json();
        // $array=json_decode($body, true);
        //print_r($body) ;
