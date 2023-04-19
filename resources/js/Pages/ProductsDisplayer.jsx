@@ -6,17 +6,17 @@ import { useForm, Head} from "@inertiajs/react"
 export default function ProductDisplayer(props)
 {
     const {data, setData}=useForm({search: ''})
-
+    console.log(props.response)
+    console.log(props)
     const jsxProducts= props.products.map(
         (product)=>{
             return(
-                <div key={product.id} className="w-[180px] h-[300px] flex flex-col gap-3 p-1 overflow-auto">
-                    <img loading='lazy' src={'/storage/'+product.path} alt='zdjęcie produktu' />
+                <div key={product.id} className="w-[200px]  flex flex-col gap-3 p-1 ">
+                    <img loading='lazy' src={product.path} alt='zdjęcie produktu h-[130px]' />
                     <b className="flex-grow">{product.name}</b>
                     <a href={product.link} className="bg-dark-sel rounded text-center self-center justify-self-end p-2 hover:bg-sel" >Zobacz cenę</a>
                 </div>
             )
-
         }
     )
     // const pagination=props.products.links.map(
@@ -36,7 +36,7 @@ export default function ProductDisplayer(props)
             <Searcher data={data} setData={setData} />
             <div className="flex flex-col gap-8 my-12 p-10">
             <MainSearchField title={h1Title} data={data} setData={setData} /></div>
-            <div className="relative top-0 gap-4 justify-center flex flex-wrap p-8">
+            <div className="relative top-0 gap-8 justify-center flex flex-wrap p-8">
                 <div className="items-stretch w-4/5 absolute top-0 left-0 h-1 bg-dark-sea"></div>
                 {jsxProducts}
             </div>
