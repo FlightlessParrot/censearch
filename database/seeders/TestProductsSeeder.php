@@ -13,6 +13,7 @@ class TestProductsSeeder extends Seeder
      */
     public function run(): void
     {
+        TestProduct::truncate();
         TestProduct::factory(50)
             ->create(); 
     }

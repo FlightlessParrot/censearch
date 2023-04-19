@@ -9,7 +9,9 @@ class ProductDisplayerController extends Controller
 {
     public function searchProducts(Request $request) 
     {
-        $testProducts= TestProduct::paginate(20);        
-        return Inertia::render('ProductsDisplayer', ["products"=>$testProducts]);
+        $search = $request->input('search');
+       // $testProducts= TestProduct::paginate(20);   
+        $testProductsWithoutPagination= TestProduct::all();    
+        return Inertia::render('ProductsDisplayer', ["products"=>$testProductsWithoutPagination, "search"=>$search]);
     }
 }

@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\ArticleCategoryController;
+
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductDisplayerController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\TopArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 
@@ -27,6 +32,13 @@ Route::get('/top/{topId}', function(TopArticle $topId)
 {
    return Inertia::render('Article', ["article"=>$topId]);
 })->name('Article');
+
+Route::get('/category/{category}',[ArticleCategoryController::class, 'index']
+)->name('Categories');
+
+Route::get('/login', [UserController::class, 'index'])->name('loginPage');
+Route::post('/login', [UserController::class, 'authenticate'])->name('login');
+
 
 
 require __DIR__.'/auth.php';

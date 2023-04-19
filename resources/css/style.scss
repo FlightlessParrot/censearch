@@ -1,12 +1,12 @@
 
 @use './predefine.scss' as pre;
-
+@forward 'react-quill/dist/quill.snow.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body{
-    background: url('../../public/images/background.jpg');
+    background: url('/storage/images/background.jpg');
     color: white;
 }
 .search{
@@ -65,3 +65,7 @@ body{
         }
       }
 
+.quill{
+display: grid;
+grid-template-rows: auto 1fr;
+}

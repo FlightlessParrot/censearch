@@ -12,7 +12,7 @@ export default function Welcome(props) {
     const [pageNumber, setPageNumber]=useState(1)
     const welcomeContentRef=useRef(null)
     
-    const {data, setData, post}=useForm({search: 'Wyszukaj'})
+    const {data, setData, post, }=useForm({search: ''})
     
     function scrollHandler(event)
     {
