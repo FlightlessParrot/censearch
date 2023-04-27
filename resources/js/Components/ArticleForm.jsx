@@ -1,15 +1,17 @@
 
-import { categories } from '@/Data/categories';
+//import { categories } from '@/Data/categories';
 import ReactQuill from 'react-quill';
 
 export default function ArticleForm(props)
-{
+{   
+    
     const sent=props.sent;
     const setData=props.setData;
     const data=props.data;
     const buttonText=props.buttonText
-    const options=categories.map(
-        (element,index)=><option key={index} value={element.name}>{element.name}</option>
+
+    const options=props.articleCategories.map(
+        (element,index)=><option key={element.id} value={element.id}>{element.name}</option>
     )
 
    
@@ -18,7 +20,7 @@ export default function ArticleForm(props)
         <label className='self-center' htmlFor="title">Tytuł artykułu</label>
         <input className='text-black self-stretch m-8  mt-0' required id='title' value={data.title} onChange={(e)=>setData('title', e.target.value)} />
         <label className='' htmlFor="category">Kategoria</label>
-        <select className='text-black  m-8  mt-0' required id='category' value={data.category} onChange={(e)=>setData('category', e.target.value)} >
+        <select className='text-black  m-8  mt-0' required id='category' value={data.article_category_id} onChange={(e)=>setData('article_category_id', e.target.value)} >
             <option>Wybierz kategorię</option>
             {options}
         </select>
@@ -29,7 +31,9 @@ export default function ArticleForm(props)
         <label htmlFor="file">Wybierz zdjęcie</label>
         <input className='m-8 mt-0' type="file" id='file'  onChange={(e)=>setData('file', e.target.files[0])} />
         <button className='bg-sel p-2 rounded m-4 mt-0 self-end'>{buttonText}</button>
+        
+      
         </form>
-
+    
     )
 }

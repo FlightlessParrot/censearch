@@ -8,6 +8,7 @@
 body{
     background: url('/storage/images/background.jpg');
     color: white;
+    overflow-x: hidden;
 }
 .search{
     background-color: pre.$c-sel;
@@ -68,4 +69,29 @@ body{
 .quill{
 display: grid;
 grid-template-rows: auto 1fr;
+}
+.mainSection{
+    h3{
+        font-size: 1.5rem;
+        font-weight:bolder;
+        margin: 20px;
+        margin-top:30px;
+    }
+    b{
+        display: inline-block;
+        margin: 20px 0px 6px 0px;
+    }
+    p{
+        display:inline-block;
+        margin: 2px;
+    }
+    ul {
+   
+      
+      
+     li {
+        margin: 6px;
+        margin-left: 20px
+
+      }}
 }

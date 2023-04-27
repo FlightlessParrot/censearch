@@ -17,10 +17,10 @@ class TopArticleSeeder extends Seeder
         TopArticle::factory()->count(200)->
         state(
         new Sequence(
-            ['category'=>"Dom i ogród"],
-            ['category'=>"Elektronika"],
-            ['category'=>"Supermarket"],
-            ['category'=>"Zdrowie"],
+            ['article_category_id'=>"1"],
+            ['article_category_id'=>"2"],
+            ['article_category_id'=>"3"],
+            ['article_category_id'=>"4"],
         )
         )->create();
     }

@@ -1,40 +1,23 @@
 import AdminMenu from "@/Layouts/AdminMenu";
-import { Link, useForm } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 
 import ArticleForm from "@/Components/ArticleForm";
-import { useEffect } from "react";
+
+import ReturnButton from "@/Components/ReturnButton";
+import { DisplayChosenTopProducts, DisplayTopProducts } from "@/Components/DisplayProducts";
 
 export default function UpdateArticle(props) {
     const { data, setData, put } = useForm({
-        title: "",
-        short_text: "",
-        full_text: "",
-        category: "",
-        file: "",
+       ...props.article
     });
-    useEffect(() => {
-        if (props.article) {
-            const p = props.article;
-            setData({
-                ...data,
-                title: p.title,
-                short_text: p.short_text,
-                full_text: p.full_text,
-                category: p.category,
-            });
-        }
-    },[props]);
-    console.log(data)
+   
+ 
+    console.log(props)
     console.log(props.article)
     return (
         <div>
             <AdminMenu />
-            <Link
-                href={route("TopPage")}
-                className="p-2 m-2 rounded bg-dark-sel"
-            >
-                Wróc
-            </Link>
+            <ReturnButton />
             <div className="flex flex-col gap-4">
                 <h1 className="text-2xl m-12 self-center">Tutaj możesz edytować artykuł</h1>
             <p className="text-xl self-center">Aktualne zdjęcie</p>
@@ -43,9 +26,12 @@ export default function UpdateArticle(props) {
             <ArticleForm
                 data={data}
                 setData={setData}
-                sent={()=>put(route("updateArticle"))}
+                sent={()=>put(route("updateArticle",props.article.id))}
                 buttonText='Aktualizuj artykuł'
+                articleCategories={props.articleCategories}
             />
+            <DisplayChosenTopProducts productsArray={props.articleTopProducts} currentArticleId={props.article.id} />
+           <DisplayTopProducts productsArray={props.products} currentArticleId={props.article.id} />
         </div>
     );
 }

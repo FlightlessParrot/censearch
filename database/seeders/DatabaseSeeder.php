@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('TestPassword') ,
         ]);
         $this->call([
-            CategorySeeder::class,
-            TestProductsSeeder::class,
             TopArticleSeeder::class,
-            NokautCategorySeeder::class
+            ArticleCategoriesSeeder::class,
+            NokautCategorySeeder::class,
+            CategorySeeder::class,
+            
         ]);
     }
 }

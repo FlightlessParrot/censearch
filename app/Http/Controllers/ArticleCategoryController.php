@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\ArticleCategory;
 use App\Models\TopArticle;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 class ArticleCategoryController extends Controller
 {
-    function index(string $category)
+    function index(ArticleCategory $category)
     {
-       $article= TopArticle::where('category',$category)->get();
-        return Inertia::render('Top', ['products'=>$article]);
+       $article= $category->TopArticles()->get();
+       $articleCategories = ArticleCategory::all();
+        return Inertia::render('Top', ['products'=>$article,'articleCategories'=> $articleCategories]);
     }
+    
 }

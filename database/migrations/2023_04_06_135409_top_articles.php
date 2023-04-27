@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->mediumText('short_text');
             $table->longText('full_text');
-            $table->string('category');
+            $table->foreignId('article_category_id');
             $table->string('path')->nullable();
             $table->timestamps();
         });

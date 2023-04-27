@@ -17,7 +17,7 @@ export default function CategoryAdmin(props)
     const elements=props.categories.data.map(
         (element)=>
         {return(<div key={element.id} className="border p-2">
-            <span className=" p-2 m-2">{element.category}</span><Link href={route('deleteCategory',[element.id])} className="bg-red-500 p-1 m-2 rounded">remove</Link>
+            <span className=" p-2 m-2">{element.category}</span><Link href={route('updateCategory',[element.id])} className="bg-sel p-1 m-2 rounded">Dodaj lub edytuj opis</Link><Link href={route('deleteCategory',[element.id])} className="bg-red-500 p-1 m-2 rounded">Usuń</Link>
         </div>)}
     )
         

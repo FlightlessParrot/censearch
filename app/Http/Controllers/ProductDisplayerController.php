@@ -2,53 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ArticleCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\TestProduct;
-use Illuminate\Support\Facades\Http;
+use App\Api\ApiNokaut;
 use Inertia\Inertia;
-use PhpParser\Node\Expr\Cast\Array_;
+
 
 class ProductDisplayerController extends Controller
 {
-   
-    static $url='http://nokaut.io/api/v2/products?fields=id,url,photo_id,title&limit=50&phrase=';
+   public function __construct(protected ApiNokaut $nokaut,)
+   { }
+    
     public function searchProducts(Request $request) 
     {
+        $validated=$request->validate(
+            ['search'=>['nullable','max:50']]
+        );
         $search = $request->input('search');
-       // $testProducts= TestProduct::paginate(20);   
-       
+        $articleCategories=ArticleCategory::all();
+        //$testProducts= TestProduct::paginate(20);   
         //$testProductsWithoutPagination= TestProduct::all();    
-        $nokautProducts=$this->getNokautProducts($search);
-       
-        return Inertia::render('ProductsDisplayer', ["products"=>$nokautProducts, "search"=>$search]);
-    }
-    private function getNokautProducts($search)
-    {
-         $response = Http::withToken($_ENV['NOKAUT_KEY'])->get(self::$url.$search)->throw();
-        $body=$response->json();
-        $products=[];
-        foreach($body['products'] as $product)
-        {
-            
-            $myProduct=Array(
-                'id'=>"", 
-                'path'=>'',
-                'name'=>'',
-                'link'=>''
 
-            );
-            $pre1=substr($product['photo_id'],0,2);
-            $pre2=substr($product['photo_id'],2,2);
-            $urlStart='http://offers.gallery/p-';
-            // rozmiar, np. 90x90, 130x130 lub 500x500
-            $size='130x130';
-            $url=$urlStart.$pre1.'-'.$pre2.'-'.$product['photo_id'].$size.'/'.$product['title'].'.jpg';
-            $myProduct['id']='nokaut'.$product['id'];
-            $myProduct['path']=$url;
-            $myProduct['name']=$product['title'];
-            $myProduct['link']='https://www.nokaut.pl/'.$product['url'];
-            array_push($products, $myProduct);
+        
+
+        $nokautProducts=$this->nokaut->getNokautProducts($search);
+        $description='';
+        if(sizeof($nokautProducts) && $search!== null && Category::where('category', $search)->doesntExist() )
+        {
+           $category=new Category;
+           $category->category=$search;
+           $category->save();
         }
-        return $products;
+        if(!sizeof($nokautProducts) && $search!== null && Category::whereExist('category', $search))
+        {
+            $category=Category::where('category', $search)->first();
+            $category->delete();
+        }
+        if(sizeof($nokautProducts) && $search!== null && Category::whereExist('category', $search))
+    {
+         $model=Category::where('category', $search)->first();
+         $description=$model->description;
+    } 
+
+        return Inertia::render('ProductsDisplayer', ["products"=>$nokautProducts, "search"=>$search, 'articleCategories'=>$articleCategories,'description'=>$description]);
     }
+   
 }

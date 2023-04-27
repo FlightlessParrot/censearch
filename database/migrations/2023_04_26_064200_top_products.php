@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\TopArticle;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,15 +12,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('categories',
-       function(Blueprint $table)
-      {
-        $table->id();
-        $table->string('category')->unique();
-        $table->text('description')->nullable();
-        $table->timestamps();
-      } 
-    );
+        Schema::create('top_products',
+        function(Blueprint $table)
+       {
+         $table->id();
+         $table->text('description')->nullable();
+         $table->foreignIdFor(TopArticle::class);
+         $table->string('product_id');
+         $table->string('product_origin');
+         $table->timestamps();
+       } );
     }
 
     /**

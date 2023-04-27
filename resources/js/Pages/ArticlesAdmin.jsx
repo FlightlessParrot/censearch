@@ -5,6 +5,7 @@ import Pager from "@/Components/Pager"
 import { TopElementsEditable } from "@/Components/TopElements"
 import { useEffect, useState } from "react"
 import { router } from "@inertiajs/react"
+import { appUrl } from "@/Data/data"
 
 export default function ArticlesAdmin(props)
 {
@@ -13,7 +14,7 @@ export default function ArticlesAdmin(props)
     title: '',
     short_text: '',
     full_text: '',
-    category: '',
+    article_category_id: '',
     file: ''
    })
    const [search, setSearch]=useState('')
@@ -27,19 +28,22 @@ export default function ArticlesAdmin(props)
     },[props.search]
    )
    console.log(props)
-
+ 
     return(<div className="p-4">
         <AdminMenu />
         <strong className="text-red-500 m-8">{props.message}</strong>
         <h2 className="text-2xl">Stwórz nowy artykuł</h2>
-        <ArticleForm data={data} setData={setData} sent={()=>post(route('addArticle'))} buttonText='Stwórz artykuł'/>
+        <ArticleForm data={data} setData={setData} articleCategories={props.articleCategories} sent={()=>post(route('addArticle'))} buttonText='Stwórz artykuł'/>
+        
+       
         <h2 className="text-2xl">Edytuj lub usuń artykuły</h2>
        
         <form onSubmit={(e)=>{e.preventDefault(); router.get(route('TopPage', {search: search}))}} className="m-8 flex-col flex gap-4 items-start"> 
         <label htmlFor="search" className="m-4 text-xl">Wyszukaj</label>
-        <input id='search'  placeholder="Wyszukaj" value={search} onChange={e=>setSearch(e.target.value)} className="p-2 self-stretch text-black"/>
+        <input id='search'  placeholder="Wyszukaj Artykuł" value={search} onChange={e=>setSearch(e.target.value)} className="p-2 self-stretch text-black"/>
         <button className="p-2 rounded m-2 bg-sel self-end ">Wyszukaj</button>
         </form>
+    
         <div className="flex flex-wrap gap-6 p-4">
             <TopElementsEditable data={props.articles.data} />
         </div>

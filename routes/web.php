@@ -4,13 +4,15 @@ use App\Http\Controllers\ArticleCategoryController;
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductDisplayerController;
+use App\Http\Controllers\SiteMapController;
+use App\Http\Controllers\TopProductsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
+use App\Models\ArticleCategory;
 use App\Models\TopArticle;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
+
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
+
 use Inertia\Inertia;
 
 
@@ -31,7 +33,8 @@ Route::get('/search', [ProductDisplayerController::class, 'searchProducts'])->na
 
 Route::get('/top/{topId}', function(TopArticle $topId)
 {
-   return Inertia::render('Article', ["article"=>$topId]);
+   $articleCategories=ArticleCategory::all();
+   return Inertia::render('Article', ["article"=>$topId, 'articleCategories'=>$articleCategories]);
 })->name('Article');
 
 Route::get('/category/{category}',[ArticleCategoryController::class, 'index']
@@ -39,10 +42,8 @@ Route::get('/category/{category}',[ArticleCategoryController::class, 'index']
 
 Route::get('/login', [UserController::class, 'index'])->name('loginPage');
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');
+Route::get('/sitemap',SiteMapController::class);
 
-Route::get('/foo', function () {
-   Artisan::call('storage:link');
-   Artisan::call('config:cache');
-});
+
 
 require __DIR__.'/auth.php';

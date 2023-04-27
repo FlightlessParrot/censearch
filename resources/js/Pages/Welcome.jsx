@@ -33,7 +33,7 @@ export default function Welcome(props) {
 
  
     return (
-        <WelcomePageLayout pageNumber={pageNumber} welcomeContentRef={welcomeContentRef} data={data} setData={setData}>
+        <WelcomePageLayout pageNumber={pageNumber} welcomeContentRef={welcomeContentRef} data={data} setData={setData} articleCategories={props.articleCategories}>
       <Head title='Wyszukaj produkty' />
       <div ref={welcomeContentRef} onScroll={scrollHandler} id='welcome-content' className='flex-grow h-full w-full overflow-scroll '>
         <WelcomeMain data={data} setData={setData} />

@@ -37,4 +37,15 @@ class CategoryAdminController extends Controller
         ]);
         return to_route('CategoriesPage');
     }
+    public function update(Request $request, Category $category) :RedirectResponse
+    {
+        $category->description=$request->input('description');
+        $category->save();
+
+        return to_route('CategoriesPage');
+    }
+    public function updateIndex(Category $category)
+    {
+        return Inertia::render('UpdateCategory',['category'=>$category]);
+    }
 }

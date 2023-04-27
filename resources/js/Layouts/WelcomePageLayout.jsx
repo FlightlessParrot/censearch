@@ -7,10 +7,11 @@ export default function WelcomePageLayout(props)
 
     return(<div className='h-screen w-screen flex flex-col overflow-clip'>
    
-    <Searcher data={props.data} setData={props.setData} />
+    <Searcher data={props.data} setData={props.setData} articleCategories={props.articleCategories}/>
     <div className='flex items-stretch h-full w-full overflow-hidden'>
-  <Indicator pageNumber={props.pageNumber} welcomeContentRef={props.welcomeContentRef}/>
+  <Indicator pageNumber={props.pageNumber} welcomeContentRef={props.welcomeContentRef} />
     {props.children}
+   
     </div>
     
    </div>)

@@ -21,7 +21,7 @@ class TopArticleFactory extends Factory
         'short_text'=>fake()->text(),
         'full_text'=>fake()->text(1000),
         'path'=>'/images/buty.jpg',
-        'category'=>'home'
+        'article_category_id'=>5
         ];
     }
 }

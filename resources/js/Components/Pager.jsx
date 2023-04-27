@@ -1,5 +1,6 @@
 import { Link } from "@inertiajs/react";
 export default function Pager(props) {
+    
     const pagination = props.links.map((element, index, array) => {
         const look = element.active ? " text-gra " : " text-white ";
         const phoneLook =
