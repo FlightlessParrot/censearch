@@ -26,8 +26,6 @@ class ProductDisplayerController extends Controller
     {
          $response = Http::withToken($_ENV['NOKAUT_KEY'])->get(self::$url.$search)->throw();
         $body=$response->json();
-       // $array=json_decode($body, true);
-       //print_r($body) ;
         $products=[];
         foreach($body['products'] as $product)
         {
@@ -48,7 +46,7 @@ class ProductDisplayerController extends Controller
             $myProduct['id']='nokaut'.$product['id'];
             $myProduct['path']=$url;
             $myProduct['name']=$product['title'];
-            $myProduct['link']=$product['url'];
+            $myProduct['link']='https://www.nokaut.pl/'.$product['url'];
             array_push($products, $myProduct);
         }
         return $products;

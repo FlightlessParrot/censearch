@@ -6,8 +6,7 @@ import { useForm, Head} from "@inertiajs/react"
 export default function ProductDisplayer(props)
 {
     const {data, setData}=useForm({search: ''})
-    console.log(props.response)
-    console.log(props)
+   
     const jsxProducts= props.products.map(
         (product)=>{
             return(

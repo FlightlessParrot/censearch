@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\TopArticle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -39,6 +40,9 @@ Route::get('/category/{category}',[ArticleCategoryController::class, 'index']
 Route::get('/login', [UserController::class, 'index'])->name('loginPage');
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');
 
-
+Route::get('/foo', function () {
+   Artisan::call('storage:link');
+   Artisan::call('config:cache');
+});
 
 require __DIR__.'/auth.php';
