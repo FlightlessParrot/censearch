@@ -1,35 +1,11 @@
 import { Link, router } from "@inertiajs/react";
 import { useState } from "react";
-import ReactQuill from "react-quill";
+
+import RankPositionImage from "./RankPositionImage";
+import { CheckPrice } from "./Links";
 export default function DisplayProducts({ productsArray }) {
     const jsxProducts = productsArray.map((product, index) => {
-        let image;
-        switch (index) {
-            case 0:
-                image = (
-                    <img
-                        className="w-8 inline-block"
-                        src="storage/images/002-best.svg"
-                    />
-                );
-                break;
-            case 1:
-                image = (
-                    <img
-                        className="w-8 inline-block"
-                        src="storage/images/003-second.svg"
-                    />
-                );
-                break;
-            case 2:
-                image = (
-                    <img
-                        className="w-8 inline-block"
-                        src="storage/images/004-third.svg"
-                    />
-                );
-                break;
-        }
+        
         return (
             <div
                 key={product.id}
@@ -44,16 +20,12 @@ export default function DisplayProducts({ productsArray }) {
 
                 <b className="flex-grow">
                     {" "}
-                    {image} {product.name}
+                    <RankPositionImage index={index} />{product.name}
                 </b>
-
-                <a
-                    rel="nofollow"
-                    href={product.link}
-                    className="bg-dark-sel rounded text-center self-center justify-self-end p-2 hover:bg-sel"
-                >
-                    Zobacz cenę
-                </a>
+                    <CheckPrice link={product.link}>
+                         Zobacz cenę
+                    </CheckPrice>
+            
             </div>
         );
     });
@@ -171,4 +143,39 @@ export function DisplayChosenTopProducts({ productsArray, currentArticleId }) {
             <div className="flex flex-wrap gap-8 p-10">{jsxProducts}</div>
         </>
     );
+}
+
+
+export function DisplayProductsWithDescription(props)
+{
+    
+    const jsxProducts = props.products.map((product, index) => {
+        return (
+            <div
+                key={product.id}
+                className="m-10"
+            >
+              <div className="m-4">
+                    <RankPositionImage index={index} />
+                   <b className="m-2">   {product.name}
+                </b></div>
+                <img
+                    loading="lazy"
+                    src={product.path}
+                    alt="zdjęcie produktu"
+                    className="object-fit float-left m-4"
+                />
+                <section className='m-6' dangerouslySetInnerHTML={{__html: product.description}}>
+
+                </section>
+                <div className="p-4 relative left-10">
+                <CheckPrice  link={product.link}>
+                    Zobacz cenę
+                </CheckPrice></div>
+            </div>
+         
+         
+        );
+    });
+  return jsxProducts;
 }

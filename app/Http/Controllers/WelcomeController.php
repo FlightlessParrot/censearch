@@ -12,7 +12,7 @@ class WelcomeController extends Controller
     
     public function __invoke()
     {
-        $articles=TopArticle::inRandomOrder()->limit(5)->get();
+        $articles=TopArticle::inRandomOrder()->limit(8)->get();
         $categories=Category::inRandomOrder()->limit(20)->get();
         $otherChoices=Category::inRandomOrder()->limit(20)->get();
         $articleCategories=ArticleCategory::all();

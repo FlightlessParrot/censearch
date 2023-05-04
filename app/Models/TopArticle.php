@@ -12,7 +12,7 @@ class TopArticle extends Model
     use HasFactory;
 
     protected $fillable=[
-        'title','article_category_id', 'path', 'full_text', 'short_text'
+        'title','article_category_id', 'path', 'full_text', 'short_text','down_page_text'
     ];
 
   public function ArticleCategory():BelongsTo

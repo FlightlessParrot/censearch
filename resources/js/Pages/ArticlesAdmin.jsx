@@ -14,6 +14,7 @@ export default function ArticlesAdmin(props)
     title: '',
     short_text: '',
     full_text: '',
+    down_page_text: '',
     article_category_id: '',
     file: ''
    })

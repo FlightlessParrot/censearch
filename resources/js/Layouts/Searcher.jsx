@@ -13,7 +13,7 @@ export default function Searcher(props)
     }
   
     const links=props.articleCategories.map(
-        (element, index)=><Link className="p-2 md:p-1 border-collapse text-center border border-y-sel border-x-0 hover:text-sel transition" href={route('Categories', {category: element.id})} key={index}>{element.name}</Link>
+        (element, index)=><Link onClick={()=>props.setLoading(true)} className="p-2 md:p-1 border-collapse text-center border border-y-sel border-x-0 hover:text-sel transition" href={route('Categories', {category: element.id})} key={index}>{element.name}</Link>
     )
     return(
         
@@ -36,7 +36,7 @@ export default function Searcher(props)
             </div>
           <div className="gap-8 flex"> <input maxLength={50} type='text' placeholder='Wyszukaj' value={props.data.search} onChange={(e)=>props.setData({search: e.target.value})}  className="max-w-md flex-grow flex-shrink h-7 bg-c-gray lg:relative lg:-left-36 border focus:border-sel focus:ring-0 focus:!outline-none text-black">
             </input>
-            <button className="search lg:relative lg:-left-32 hover:bg-dark-sel transition-all duration-300" ><Link href={route('ProductsDisplayer',
+            <button className="search lg:relative lg:-left-32 hover:bg-dark-sel transition-all duration-300" ><Link onClick={()=>props.setLoading(true)} href={route('ProductsDisplayer',
             {search: props.data.search})}>Wyszukaj</Link> </button></div> 
             </form>
          

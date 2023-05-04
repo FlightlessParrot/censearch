@@ -45,7 +45,7 @@ class ArticleAdminController extends Controller
         $articleTopProducts=[];
         foreach($TopProducts as $p)
         {
-            $id=str_replace('nokaut','' ,$p->product_id);
+            $id=$this->nokaut->convertNokautIdToId($p->product_id);
             $topProduct=$this->nokaut->getProductById($id);
             $topProduct['topProductId']=$p->id;
             array_push($articleTopProducts,$topProduct);
@@ -79,7 +79,7 @@ class ArticleAdminController extends Controller
         }
         
         $article->save();
-        return to_route('updatePage', ['article' => $article->id]);
+        return to_route('TopPage');
     }
 
     public function addArticle(Request $request): RedirectResponse

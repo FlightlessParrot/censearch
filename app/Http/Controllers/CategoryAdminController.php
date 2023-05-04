@@ -41,7 +41,7 @@ class CategoryAdminController extends Controller
     {
         $category->description=$request->input('description');
         $category->save();
-
+        
         return to_route('CategoriesPage');
     }
     public function updateIndex(Category $category)

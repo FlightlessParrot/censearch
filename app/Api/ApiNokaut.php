@@ -37,7 +37,7 @@ class ApiNokaut
             );
             $pre1=substr($product['photo_id'],0,2);
             $pre2=substr($product['photo_id'],2,2);
-            $urlStart='http://offers.gallery/p-';
+            $urlStart='https://offers.gallery/p-';
             // rozmiar, np. 90x90, 130x130 lub 500x500
             $size='200x200';
             $url=$urlStart.$pre1.'-'.$pre2.'-'.$product['photo_id'].$size.'/'.$product['title'].'.jpg';
@@ -55,5 +55,12 @@ class ApiNokaut
 
         return $myProduct;
 
+    }
+    public function convertNokautIdToId($nokautId):string
+    {
+        
+            $id=str_replace('nokaut','' ,$nokautId);
+            
+           return $id;
     }
 }

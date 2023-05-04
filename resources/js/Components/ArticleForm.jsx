@@ -28,6 +28,8 @@ export default function ArticleForm(props)
         <textarea maxLength={250} className='m-8 mt-0 text-black self-stretch h-40' id='short_text' value={data.short_text} onChange={(e)=>setData('short_text', e.target.value)}/>
         <label htmlFor="full_text">Treść artykułu</label>
   <ReactQuill className='bg-white text-black self-stretch h-[400px] mt-0 overflow-auto m-8 ' theme="snow" id="full_text" value={data.full_text}  onChange={(e)=>setData('full_text', e)}/>
+<label htmlFor="down_page_text">Tekst, który pojawi się na dole strony</label>
+  <ReactQuill className='bg-white text-black self-stretch h-[400px] mt-0 overflow-auto m-8 ' theme="snow" id="down_page_text" value={data.down_page_text}  onChange={(e)=>setData('down_page_text', e)}/>
         <label htmlFor="file">Wybierz zdjęcie</label>
         <input className='m-8 mt-0' type="file" id='file'  onChange={(e)=>setData('file', e.target.files[0])} />
         <button className='bg-sel p-2 rounded m-4 mt-0 self-end'>{buttonText}</button>

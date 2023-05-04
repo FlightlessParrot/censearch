@@ -6,13 +6,14 @@ import WelcomeMain from '@/Sections/Welcome-Sections/WelcomeMain';
 import WelcomeTop from '@/Sections/Welcome-Sections/WelcomeTop';
 
 import WelcomeSuggestions from '@/Sections/Welcome-Sections/WelcomeSuggestions';
+import Spinner from '@/Components/Spinner';
 
 export default function Welcome(props) {
    
     const [pageNumber, setPageNumber]=useState(1)
     const welcomeContentRef=useRef(null)
-    
-    const {data, setData, post, }=useForm({search: ''})
+    const [loading, setLoading]=useState(false)
+    const [data, setData ]=useState({search: ''})
     
     function scrollHandler(event)
     {
@@ -33,10 +34,12 @@ export default function Welcome(props) {
 
  
     return (
-        <WelcomePageLayout pageNumber={pageNumber} welcomeContentRef={welcomeContentRef} data={data} setData={setData} articleCategories={props.articleCategories}>
+        <WelcomePageLayout setLoading={setLoading} pageNumber={pageNumber} welcomeContentRef={welcomeContentRef} data={data} setData={setData} articleCategories={props.articleCategories}>
+          {loading &&  <Spinner />}
+         
       <Head title='Wyszukaj produkty' />
       <div ref={welcomeContentRef} onScroll={scrollHandler} id='welcome-content' className='flex-grow h-full w-full overflow-scroll '>
-        <WelcomeMain data={data} setData={setData} />
+        <WelcomeMain data={data} setData={setData} setLoading={setLoading}/>
         <WelcomeTop topArray={props.articles} />
         <WelcomeSuggestions otherSearches={props.otherChoices} suggestions={props.categories} />
       </div>

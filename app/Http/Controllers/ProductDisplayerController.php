@@ -34,12 +34,12 @@ class ProductDisplayerController extends Controller
            $category->category=$search;
            $category->save();
         }
-        if(!sizeof($nokautProducts) && $search!== null && Category::whereExist('category', $search))
+        if(!sizeof($nokautProducts) && $search!== null && Category::where('category', $search)->first()!==null)
         {
             $category=Category::where('category', $search)->first();
             $category->delete();
         }
-        if(sizeof($nokautProducts) && $search!== null && Category::whereExist('category', $search))
+        if(sizeof($nokautProducts) && $search!== null && Category::where('category', $search)->first()!==null)
     {
          $model=Category::where('category', $search)->first();
          $description=$model->description;
